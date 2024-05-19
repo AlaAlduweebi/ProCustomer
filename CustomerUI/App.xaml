@@ -1,0 +1,46 @@
+﻿<Application x:Class="CustomerUI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:VM="clr-namespace:CustomerUI.ViewModel"
+             xmlns:MainView="clr-namespace:CustomerUI.Base"
+             xmlns:TaskbarVM="clr-namespace:CustomerUI.ViewModel.TaskbarVMs"
+             xmlns:CustomerVM="clr-namespace:CustomerUI.ViewModel.TaskbarVMs.CustomerVMs"
+             xmlns:CustomerTaskListVM="clr-namespace:CustomerUI.ViewModel.TaskbarVMs.CustomerVMs.TasksListVMs"
+             StartupUri="View/MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <MainView:CustomerRepository x:Key="CustomerRepository"/>
+            <VM:CustomersListVM x:Key="CustomersListVM" />
+            <TaskbarVM:TaskbarVM x:Key="TaskbarVM" />
+            <TaskbarVM:DatabaseVM x:Key="DatabaseVM" />
+            <CustomerVM:CustomerVM x:Key="CustomerVM" />
+            <CustomerTaskListVM:CardsVM x:Key="CardsVM" />
+            <CustomerTaskListVM:CompanyVM x:Key="CompanyVM" />
+            <CustomerTaskListVM:InboxVM x:Key="InboxVM" />
+            <CustomerTaskListVM:MoreVM x:Key="MoreVM" />
+            <CustomerTaskListVM:ProfileVM x:Key="ProfileVM" />
+            <CustomerTaskListVM:TransactionsVM x:Key="TransactionsVM" />
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/CustomersListStyle.xaml"/>
+                <ResourceDictionary Source="Styles/ScrollViewerStyle.xaml"/>
+                <ResourceDictionary Source="Styles/TaskbarButtonsStyle.xaml"/>
+                <ResourceDictionary Source="Styles/ProfileButtonsStyle.xaml"/>
+                <ResourceDictionary Source="Styles/BackNextButtonsStyle.xaml"/>
+                <ResourceDictionary Source="Styles/GridViewColumnHeaderStyle.xaml"/>
+                <ResourceDictionary Source="Styles/OutputDetailsTextBoxStyle.xaml"/>
+                <ResourceDictionary Source="Styles/ExportButtonStyle.xaml"/>
+                <ResourceDictionary Source="Styles/PrintButtonStyle.xaml"/>
+                <ResourceDictionary Source="Styles/SaveButtonStyle.xaml"/>
+                <ResourceDictionary Source="Styles/DeleteButtonStyle.xaml"/>
+                <ResourceDictionary Source="Styles/SearchTextBoxStyle.xaml"/>
+                <ResourceDictionary Source="Styles/AddCustomerButtonStyle.xaml"/>
+                <ResourceDictionary Source="Styles/UpdateCustomersListButtonStyle.xaml"/>
+                <ResourceDictionary Source="Styles/DatabaseSetupButtonsStyle.xaml"/>
+                <ResourceDictionary Source="Styles/DbHistoryListStyle.xaml"/>
+                <ResourceDictionary Source="Styles/DbMessageBoxStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,149 @@
+﻿<UserControl x:Class="CustomerUI.View.UserControls.TaskbarUCs.CustomerUCs.CustomerUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CustomerUI.View.UserControls"
+             xmlns:localVM="clr-namespace:CustomerUI.ViewModel.TaskbarVMs.CustomerVMs"
+             xmlns:localDesign="clr-namespace:CustomerUI.Design"
+             Height="575"
+             mc:Ignorable="d"
+             DataContext="{StaticResource CustomerVM}">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="960"/>
+            <ColumnDefinition Width="586"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Margin="240,0,0,0">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="480"/>
+                </Grid.RowDefinitions>
+
+                <Border BorderThickness="0.5,0,0,0.5" BorderBrush="#CCCCCC" Background="#FFF3F3F3" Grid.Row="0" CornerRadius="0,14,0,0">
+                    <DockPanel Margin="15,10,0,0" VerticalAlignment="Center">
+                        <StackPanel HorizontalAlignment="Left" Margin="0,0,15,0" Orientation="Horizontal">
+                            <Path Fill="#007ACC" Data="M12,11A5,5,0,1,0,7,6,5.006,5.006,0,0,0,12,11Zm0-8A3,3,0,1,1,9,6,3,3,0,0,1,12,3ZM3,22V18a5.006,5.006,0,0,1,5-5h8a5.006,5.006,0,0,1,5,5v4a1,1,0,0,1-2,0V18a3,3,0,0,0-3-3H8a3,3,0,0,0-3,3v4a1,1,0,0,1-2,0Z" />
+                            <TextBox Text="{Binding SelectedCustomer.Fullname}" Background="Transparent" BorderThickness="0" IsReadOnly="True" Margin="10,5,0,0" FontWeight="Bold" FontSize="15"/>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Right" Margin="0,0,15,0" Orientation="Horizontal" VerticalAlignment="Center">
+                            <Path Margin="0,1,-10,0" VerticalAlignment="Center"
+                                  Fill="{Binding MemberStatusColor}" 
+                                  Data="M24 33C28.9706 33 33 28.9706 33 24C33 19.0294 28.9706 15 24 15C19.0294 15 15 19.0294 15 24C15 28.9706 19.0294 33 24 33Z">
+                                <Path.RenderTransform>
+                                    <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
+                                </Path.RenderTransform>
+                            </Path>
+                            <TextBlock Margin="0,4.8,0,0" Text="{Binding SelectedCustomer.MemberStatus}" Foreground="{Binding MemberStatusColor}" FontWeight="Bold" FontSize="14"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+
+                <Border BorderThickness="0.5,0,0,0.5" BorderBrush="#CCCCCC" Background="#FFF3F3F3" Grid.Row="1" CornerRadius="0,0,0,14">
+                    <DockPanel>
+                        <StackPanel Margin="12,0,0,0" Orientation="Horizontal" VerticalAlignment="Center">
+                            <Label Content="{Binding TaskButtonName}" Foreground="#007ACC" FontWeight="Bold"/>
+                            <Path Fill="#808080" Data="M8.91016 19.9201L15.4302 13.4001C16.2002 12.6301 16.2002 11.3701 15.4302 10.6001L8.91016 4.08008" />
+                            <Label Content="{Binding SelectedCustomer.Fullname}" Margin="8,0,0,0" FontWeight="Bold" Foreground="#808080"/>
+                        </StackPanel>
+                        <StackPanel Margin="0,0,10,0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            <Button Height="25" Width="25" Style="{StaticResource PrintButtonStyle}"/>
+                            <Button Height="25" Width="120" Margin="5" 
+                                    Content="Exportieren"
+                                    Tag="M15 15H2V6h2.595s.689-.896 2.17-2H1a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h15a1 1 0 0 0 1-1v-3.746l-2 1.645V15zm-1.639-6.95v3.551L20 6.4l-6.639-4.999v3.131C5.3 4.532 5.3 12.5 5.3 12.5c2.282-3.748 3.686-4.45 8.061-4.45z"
+                                    Style="{StaticResource ExportButtonStyle}" Cursor="Hand"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+
+                <StackPanel Grid.Row="2" Margin="0,5,0,0">
+                    <ContentControl Margin="0,10,0,0" Content="{Binding SelectedControl}" Background="#FFF3F3F3"/>
+                </StackPanel>
+
+            </Grid>
+        </StackPanel>
+
+        <Border Grid.Column="1" Margin="-960,12,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="240" CornerRadius="11">
+            <!--<Border.Effect>
+                <DropShadowEffect Color="LightGray" Direction="320" ShadowDepth="1" BlurRadius="1"/>
+            </Border.Effect>-->
+            
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,3,0,0">
+                    <Button Name="Next"
+                            Style="{StaticResource BackNextButtonsStyle}" 
+                            Command="{Binding DataContext.PreviousCustomerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            IsEnabled="{Binding DataContext.PreviousCustomerCommand.CanExecute, RelativeSource={RelativeSource AncestorType=UserControl}}">
+                        <Button.ToolTip>
+                            <ToolTip Content="Vorherige Kunde" BorderBrush="#CCCCCC" Background="White"/>
+                        </Button.ToolTip>
+                        <Path Margin="-45,-65,0,0" 
+                              Fill="White" 
+                              Data="M14.2893 5.70708C13.8988 5.31655 13.2657 5.31655 12.8751 5.70708L7.98768 10.5993C7.20729 11.3805 7.2076 12.6463 7.98837 13.427L12.8787 18.3174C13.2693 18.7079 13.9024 18.7079 14.293 18.3174C14.6835 17.9269 14.6835 17.2937 14.293 16.9032L10.1073 12.7175C9.71678 12.327 9.71678 11.6939 10.1073 11.3033L14.2893 7.12129C14.6799 6.73077 14.6799 6.0976 14.2893 5.70708Z" />
+                    </Button>
+                    <Button Name="Back" 
+                            Style="{StaticResource BackNextButtonsStyle}" 
+                            Command="{Binding DataContext.NextCustomerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                            IsEnabled="{Binding DataContext.NextCustomerCommand.CanExecute, RelativeSource={RelativeSource AncestorType=UserControl}}">
+                        <Button.ToolTip>
+                            <ToolTip Content="Nächste Kunde" BorderBrush="#CCCCCC" Background="White"/>
+                        </Button.ToolTip>
+                        <Path Margin="58,-65,0,0"
+                              Fill="White" 
+                              Data="M9.71069 18.2929C10.1012 18.6834 10.7344 18.6834 11.1249 18.2929L16.0123 13.4006C16.7927 12.6195 16.7924 11.3537 16.0117 10.5729L11.1213 5.68254C10.7308 5.29202 10.0976 5.29202 9.70708 5.68254C9.31655 6.07307 9.31655 6.70623 9.70708 7.09676L13.8927 11.2824C14.2833 11.6729 14.2833 12.3061 13.8927 12.6966L9.71069 16.8787C9.32016 17.2692 9.32016 17.9023 9.71069 18.2929Z" />
+                    </Button>
+                </StackPanel>
+                <Border Margin="15,-150,15,0" Height="545" Width="auto" Background="White" BorderThickness="0.5,0,0.5,0.5" BorderBrush="#CCCCCC" CornerRadius="120,120,20,20">
+                    <StackPanel>
+                        <Border Margin="0,10,0,0" Height="100" Width="100" Background="#FFE8E8E8" CornerRadius="50" BorderBrush="LightGray" BorderThickness="0.7">
+                            <!--<Border.Effect>
+                                <DropShadowEffect Color="LightGray" Direction="320" ShadowDepth="1" BlurRadius="1"/>
+                            </Border.Effect>-->
+                            <TextBlock Text="{Binding ShortCustomerName}" FontSize="50" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <StackPanel Margin="0,15,0,0" Orientation="Vertical">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="70"/>
+                                    <RowDefinition Height="300"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" HorizontalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBox FontWeight="Bold" FontSize="14" Text="{Binding SelectedCustomer.Fullname, Mode=OneWay}" BorderThickness="0" IsReadOnly="True"/>
+                                    </StackPanel>
+                                    <TextBlock Margin="0,20,0,0" HorizontalAlignment="Center" Text="Mitgliednummer" FontSize="10.5" Foreground="#808080" />
+                                    <TextBox HorizontalAlignment="Center" Text="{Binding SelectedCustomer.MemberNr, Mode=OneWay}" BorderThickness="0" IsReadOnly="True" FontSize="12.2" Foreground="Black" />
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" HorizontalAlignment="Center">
+                                    <Border Margin="0,10,0,0" Width="150" BorderThickness="0.5" BorderBrush="LightGray"  HorizontalAlignment="Center"/>
+
+                                    <ItemsControl ItemsSource="{Binding Buttons}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button Content="{Binding Content}" Style="{StaticResource ProfileButtonsStyle}" 
+                                                        Command="{Binding DataContext.ButtonClickCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                                        Tag="{Binding IconPath}" 
+                                                        CommandParameter="{Binding}">
+                                                </Button>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                                <StackPanel Grid.Row="2" Margin="0,28,0,0">
+                                    <Border Width="150" BorderThickness="0.5" BorderBrush="LightGray"  HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</UserControl>

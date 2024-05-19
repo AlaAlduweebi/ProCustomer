@@ -1,0 +1,25 @@
+# Ignoriere alle Verzeichnisse, die Objektdateien und Binärdateien enthalten
+bin/
+obj/
+out/
+
+# Ignoriere die Visual Studio spezifischen Dateien und Verzeichnisse
+.vs/
+*.user
+*.suo
+*.userosscache
+
+# Ignoriere alle NuGet heruntergeladenen Pakete
+packages/
+
+# Ignoriere Build-Ausgaben
+*.dll
+*.exe
+*.pdb
+
+# Ignoriere Logging-Dateien
+*.log
+
+# Ignoriere alle Temporären Dateien
+*.tmp
+*.temp

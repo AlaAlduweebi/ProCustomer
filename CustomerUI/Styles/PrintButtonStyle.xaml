@@ -1,0 +1,61 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="PrintButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="#007ACC"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderBrush" Value="#CCCCCC"/>
+        <Setter Property="BorderThickness" Value="0.3"/>
+        <Setter Property="Padding" Value="10 5"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <ToolTip Content="Ausdrucken" BorderBrush="#CCCCCC" Background="White"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                           BorderBrush="{TemplateBinding BorderBrush}"
+                           BorderThickness="{TemplateBinding BorderThickness}"
+                           CornerRadius="4">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.7,1.5" StartPoint="0.4,0.1">
+                                <GradientStop Color="#007ACC" Offset="0"/>
+                                <GradientStop Color="White" Offset="3.5"/>
+                                <GradientStop Color="#FF3EACF5" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <!--<Border.Effect>
+                            <DropShadowEffect Color="LightGray" Direction="320" ShadowDepth="1" BlurRadius="1" Opacity="1"/>
+                        </Border.Effect>-->
+                        <StackPanel Orientation="Horizontal">
+                            <Path x:Name="Icon" 
+                                 Data="M2.25 5H3V3.25A2.25 2.25 0 015.25 1h5.5A2.25 2.25 0 0113 3.25V5h.75A2.25 2.25 0 0116 7.25v3.5A2.25 2.25 0 0113.75 13H12.5v.25c0 .69-.56 1.25-1.25 1.25h-6.5c-.69 0-1.25-.56-1.25-1.25V13H2.25A2.25 2.25 0 010 10.75v-3.5A2.25 2.25 0 012.25 5zm3-2.5a.75.75 0 00-.75.75V5h7V3.25a.75.75 0 00-.75-.75h-5.5zm-1.75 9V9.75c0-.69.56-1.25 1.25-1.25h6.5c.69 0 1.25.56 1.25 1.25v1.75h1.25a.75.75 0 00.75-.75v-3.5a.75.75 0 00-.75-.75H2.25a.75.75 0 00-.75.75v3.5c0 .414.336.75.75.75H3.5zM11 13H5v-3h6v3z" 
+                                 Fill="{TemplateBinding Foreground}"
+                                 Height="20" Width="30" Margin="5,5,0,0">
+                                <Path.RenderTransform>
+                                    <ScaleTransform ScaleX="0.9" ScaleY="1"/>
+                                </Path.RenderTransform>
+                            </Path>
+                            <ContentPresenter Content="{TemplateBinding Content}"
+                                               VerticalAlignment="Center" Margin="-4,0,0,0"/>
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#FF137BC1"/>
+                            <Setter TargetName="Icon" Property="Fill" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="FontSize" Value="11.9"/>
+                            <Setter TargetName="border" Property="Background" Value="#00528A"/>
+                            <Setter TargetName="Icon" Property="Fill" Value="White"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

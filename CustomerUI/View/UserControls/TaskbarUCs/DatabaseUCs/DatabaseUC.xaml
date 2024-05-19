@@ -1,0 +1,335 @@
+﻿<UserControl x:Class="CustomerUI.View.UserControls.TaskbarUCs.DatabaseUCs.DatabaseUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CustomerUI.View.UserControls.TaskbarUCs.DatabaseUCs" 
+             xmlns:taskbarvms="clr-namespace:CustomerUI.ViewModel.TaskbarVMs" 
+             DataContext="{StaticResource DatabaseVM}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <Border Grid.Row="0" BorderThickness="0" BorderBrush="#CCCCCC" Background="#FFF3F3F3" CornerRadius="14,14,0,0">
+            <StackPanel Margin="15,22,0,0" Orientation="Horizontal" VerticalAlignment="Top">
+                <Path Fill="#007ACC" Margin="0,-6,0,0"
+                         Data="M8,16.5a1,1,0,1,0,1,1A1,1,0,0,0,8,16.5ZM12,2C8,2,4,3.37,4,6V18c0,2.63,4,4,8,4s8-1.37,8-4V6C20,3.37,16,2,12,2Zm6,16c0,.71-2.28,2-6,2s-6-1.29-6-2V14.73A13.16,13.16,0,0,0,12,16a13.16,13.16,0,0,0,6-1.27Zm0-6c0,.71-2.28,2-6,2s-6-1.29-6-2V8.73A13.16,13.16,0,0,0,12,10a13.16,13.16,0,0,0,6-1.27ZM12,8C8.28,8,6,6.71,6,6s2.28-2,6-2,6,1.29,6,2S15.72,8,12,8ZM8,10.5a1,1,0,1,0,1,1A1,1,0,0,0,8,10.5Z">
+                    <Path.RenderTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                    </Path.RenderTransform>
+                </Path>
+                <TextBox Text="Datenbank Einstellungen" Background="Transparent" BorderThickness="0" IsReadOnly="True" Margin="20,3,0,0" FontWeight="Bold" FontSize="15"/>
+            </StackPanel>
+        </Border>
+        
+        <StackPanel Grid.Row="1" Width="auto" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <ItemsControl ItemsSource="{Binding Statistics}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="10,0,0,0" Height="60" Width="140"  BorderBrush="LightGray" Background="White" BorderThickness="0.5" CornerRadius="14" VerticalAlignment="Center">
+                            <!--<Border.Effect>
+                                <DropShadowEffect Color="LightGray" Direction="320" ShadowDepth="1" BlurRadius="1"/>
+                            </Border.Effect>-->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <StackPanel Margin="5" VerticalAlignment="Center">
+                                    <TextBlock  Text="{Binding Table}" VerticalAlignment="Center" Background="Transparent"/>
+                                    <Border Margin="5" BorderThickness="0,0,0,1" Height="20" Width="30" BorderBrush="LightGray">
+                                        <TextBlock Text="{Binding Count}" Foreground="#007ACC" VerticalAlignment="Center" Background="Transparent" TextAlignment="Center" FontWeight="Bold"/>
+                                    </Border>
+                                </StackPanel>
+                                <local:CircularProgressRing Percentage="{Binding Percentage}" Margin="5"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </StackPanel>
+
+        <Grid Grid.Row="2" Margin="0,10,0,0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="650"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Margin="-10,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="140"/>
+                    <RowDefinition Height="140"/>
+                    <RowDefinition Height="140"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Height="130" Width="600" Background="White" CornerRadius="14" BorderBrush="LightGray" BorderThickness="0.5">
+                    <!--<Border.Effect>
+                        <DropShadowEffect Color="LightGray" Direction="320" ShadowDepth="1" BlurRadius="1"/>
+                    </Border.Effect>-->
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="180"/>
+                            <ColumnDefinition Width="400"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0" Margin="10" Background="#FFF3F3F3" CornerRadius="14"  BorderBrush="LightGray" BorderThickness="0.5">
+                            <!--<Border.Effect>
+                                <DropShadowEffect Color="LightGray" Direction="320" ShadowDepth="1" BlurRadius="1"/>
+                            </Border.Effect>-->
+                            
+                            <StackPanel Margin="23,20,0,0" HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Path Fill="#007ACC" 
+                              Data="M8,16.5a1,1,0,1,0,1,1A1,1,0,0,0,8,16.5ZM12,2C8,2,4,3.37,4,6V18c0,2.63,4,4,8,4s8-1.37,8-4V6C20,3.37,16,2,12,2Zm6,16c0,.71-2.28,2-6,2s-6-1.29-6-2V14.73A13.16,13.16,0,0,0,12,16a13.16,13.16,0,0,0,6-1.27Zm0-6c0,.71-2.28,2-6,2s-6-1.29-6-2V8.73A13.16,13.16,0,0,0,12,10a13.16,13.16,0,0,0,6-1.27ZM12,8C8.28,8,6,6.71,6,6s2.28-2,6-2,6,1.29,6,2S15.72,8,12,8ZM8,10.5a1,1,0,1,0,1,1A1,1,0,0,0,8,10.5Z">
+                                    <Path.RenderTransform>
+                                        <ScaleTransform ScaleX="3" ScaleY="3.2"/>
+                                    </Path.RenderTransform>
+                                </Path>
+                                <Path Fill="#007ACC" Margin="50,30,0,0"
+                                      Data="M48.355,17.922c3.705,2.323,6.303,6.254,6.776,10.817c1.511,0.706,3.188,1.112,4.966,1.112
+		                                    c6.491,0,11.752-5.261,11.752-11.751c0-6.491-5.261-11.752-11.752-11.752C53.668,6.35,48.453,11.517,48.355,17.922z M40.656,41.984
+		                                    c6.491,0,11.752-5.262,11.752-11.752s-5.262-11.751-11.752-11.751c-6.49,0-11.754,5.262-11.754,11.752S34.166,41.984,40.656,41.984
+		                                    z M45.641,42.785h-9.972c-8.297,0-15.047,6.751-15.047,15.048v12.195l0.031,0.191l0.84,0.263
+		                                    c7.918,2.474,14.797,3.299,20.459,3.299c11.059,0,17.469-3.153,17.864-3.354l0.785-0.397h0.084V57.833
+		                                    C60.688,49.536,53.938,42.785,45.641,42.785z M65.084,30.653h-9.895c-0.107,3.959-1.797,7.524-4.47,10.088
+		                                    c7.375,2.193,12.771,9.032,12.771,17.11v3.758c9.77-0.358,15.4-3.127,15.771-3.313l0.785-0.398h0.084V45.699
+		                                    C80.13,37.403,73.38,30.653,65.084,30.653z M20.035,29.853c2.299,0,4.438-0.671,6.25-1.814c0.576-3.757,2.59-7.04,5.467-9.276
+		                                    c0.012-0.22,0.033-0.438,0.033-0.66c0-6.491-5.262-11.752-11.75-11.752c-6.492,0-11.752,5.261-11.752,11.752
+		                                    C8.283,24.591,13.543,29.853,20.035,29.853z M30.589,40.741c-2.66-2.551-4.344-6.097-4.467-10.032
+		                                    c-0.367-0.027-0.73-0.056-1.104-0.056h-9.971C6.75,30.653,0,37.403,0,45.699v12.197l0.031,0.188l0.84,0.265
+		                                    c6.352,1.983,12.021,2.897,16.945,3.185v-3.683C17.818,49.773,23.212,42.936,30.589,40.741z">
+                                    <Path.RenderTransform>
+                                        <ScaleTransform ScaleX="0.6" ScaleY="0.6"/>
+                                    </Path.RenderTransform>
+                                </Path>
+                                <Path Fill="#007ACC" Margin="-76,-5,0,0"
+                              Data="M12 4C12.5523 4 13 4.44772 13 5V11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H13V19C13 19.5523 12.5523 20 12 20C11.4477 20 11 19.5523 11 19V13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H11V5C11 4.44772 11.4477 4 12 4Z">
+                                    <Path.RenderTransform>
+                                        <ScaleTransform ScaleX="1.7" ScaleY="1.7"/>
+                                    </Path.RenderTransform>
+                                </Path>
+                            </StackPanel>
+                        </Border>
+
+                        <StackPanel Grid.Column="1" Width="360" Margin="10,5,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                            <StackPanel>
+                                <TextBlock Text="Zufällige Kunden erstellen" FontWeight="Bold" FontSize="14"/>
+                                <TextBlock Text="Durch Eingabe einer Zahl können zufällige Kunden mit ihren Daten generiert werden. Dabei werden vorhandene Daten gelöscht." Margin="0,10,0,0" FontWeight="Bold" TextWrapping="Wrap" Foreground="#808080"/>
+                            </StackPanel>
+
+                            <DockPanel Margin="0,5,0,0" >
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Label Content="Anzahl Kunden:" VerticalAlignment="Center"/>
+                                    <Slider x:Name="sldCustomersCount" Width="100" Margin="5" Minimum="1" Maximum="30" TickFrequency="1" IsSnapToTickEnabled="True"
+                                            Value="{Binding CustomersCount, Mode=TwoWay}" />
+                                    <TextBlock Text="{Binding ElementName=sldCustomersCount, Path=Value}" VerticalAlignment="Center" Margin="5"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Margin="5"
+                                        Command="{Binding CreateDataCommand}"
+                                        Style="{StaticResource DatabaseSetupButtonsStyle}">
+                                        <StackPanel Height="40" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <TextBlock Margin="12,0,0,0" Text="Erstellen" VerticalAlignment="Center"/>
+                                            <Path Margin="5,12,0,0"
+                                                  Data="M20.71,3.29a2.91,2.91,0,0,0-2.2-.84,3.25,3.25,0,0,0-2.17,1L9.46,10.29s0,0,0,0a.62.62,0,0,0-.11.17,1,1,0,0,0-.1.18l0,0L8,14.72A1,1,0,0,0,9,16a.9.9,0,0,0,.28,0l4-1.17,0,0,.18-.1a.62.62,0,0,0,.17-.11l0,0,6.87-6.88a3.25,3.25,0,0,0,1-2.17A2.91,2.91,0,0,0,20.71,3.29Z M20,22H4a2,2,0,0,1-2-2V4A2,2,0,0,1,4,2h8a1,1,0,0,1,0,2H4V20H20V12a1,1,0,0,1,2,0v8A2,2,0,0,1,20,22Z" 
+                                                  Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                                  Height="30" Width="30">
+                                                <Path.RenderTransform>
+                                                    <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
+                                                </Path.RenderTransform>
+                                            </Path>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                            </DockPanel>
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="1" Height="130" Width="600" Background="White" CornerRadius="14"  BorderBrush="LightGray" BorderThickness="0.5">
+                    <!--<Border.Effect>
+                        <DropShadowEffect Color="LightGray" Direction="320" ShadowDepth="1" BlurRadius="1"/>
+                    </Border.Effect>-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="180"/>
+                            <ColumnDefinition Width="400"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0" Margin="10" Background="#FFF3F3F3" CornerRadius="14" BorderBrush="LightGray" BorderThickness="0.5">
+                            <!--<Border.Effect>
+                                <DropShadowEffect Color="LightGray" Direction="320" ShadowDepth="1" BlurRadius="1"/>
+                            </Border.Effect>-->
+                            <StackPanel Margin="23,0,0,0" Orientation="Horizontal">
+                                <Path Fill="#007ACC" Margin="-7,20,0,0"
+                                  Data="M8,16.5a1,1,0,1,0,1,1A1,1,0,0,0,8,16.5ZM12,2C8,2,4,3.37,4,6V18c0,2.63,4,4,8,4s8-1.37,8-4V6C20,3.37,16,2,12,2Zm6,16c0,.71-2.28,2-6,2s-6-1.29-6-2V14.73A13.16,13.16,0,0,0,12,16a13.16,13.16,0,0,0,6-1.27Zm0-6c0,.71-2.28,2-6,2s-6-1.29-6-2V8.73A13.16,13.16,0,0,0,12,10a13.16,13.16,0,0,0,6-1.27ZM12,8C8.28,8,6,6.71,6,6s2.28-2,6-2,6,1.29,6,2S15.72,8,12,8ZM8,10.5a1,1,0,1,0,1,1A1,1,0,0,0,8,10.5Z">
+                                    <Path.RenderTransform>
+                                        <ScaleTransform ScaleX="3" ScaleY="3.2"/>
+                                    </Path.RenderTransform>
+                                </Path>
+                                <Path Fill="#007ACC" Margin="50,45,0,0"
+                                  Data="M11.8489 22.6922C11.5862 22.7201 11.3509 22.5283 11.3232 22.2638L10.4668 14.0733C10.4392 13.8089 10.6297 13.5719 10.8924 13.5441L11.368 13.4937C11.6307 13.4659 11.8661 13.6577 11.8937 13.9221L12.7501 22.1126C12.7778 22.3771 12.5873 22.614 12.3246 22.6418L11.8489 22.6922Z M16.1533 22.6418C15.8906 22.614 15.7001 22.3771 15.7277 22.1126L16.5841 13.9221C16.6118 13.6577 16.8471 13.4659 17.1098 13.4937L17.5854 13.5441C17.8481 13.5719 18.0387 13.8089 18.011 14.0733L17.1546 22.2638C17.127 22.5283 16.8916 22.7201 16.6289 22.6922L16.1533 22.6418Z M11.9233 1C11.3494 1 10.8306 1.34435 10.6045 1.87545L9.54244 4.37037H4.91304C3.8565 4.37037 3 5.23264 3 6.2963V8.7037C3 9.68523 3.72934 10.4953 4.67218 10.6145L7.62934 26.2259C7.71876 26.676 8.11133 27 8.56729 27H20.3507C20.8242 27 21.2264 26.6513 21.2966 26.1799L23.4467 10.5956C24.3313 10.4262 25 9.64356 25 8.7037V6.2963C25 5.23264 24.1435 4.37037 23.087 4.37037H18.4561L17.394 1.87545C17.1679 1.34435 16.6492 1 16.0752 1H11.9233ZM16.3747 4.37037L16.0083 3.50956C15.8576 3.15549 15.5117 2.92593 15.1291 2.92593H12.8694C12.4868 2.92593 12.141 3.15549 11.9902 3.50956L11.6238 4.37037H16.3747ZM21.4694 11.0516C21.5028 10.8108 21.3154 10.5961 21.0723 10.5967L7.1143 10.6285C6.86411 10.6291 6.67585 10.8566 6.72212 11.1025L9.19806 24.259C9.28701 24.7317 9.69985 25.0741 10.1808 25.0741H18.6559C19.1552 25.0741 19.578 24.7058 19.6465 24.2113L21.4694 11.0516ZM22.1304 8.7037C22.6587 8.7037 23.087 8.27257 23.087 7.74074V7.25926C23.087 6.72743 22.6587 6.2963 22.1304 6.2963H5.86957C5.34129 6.2963 4.91304 6.72743 4.91304 7.25926V7.74074C4.91304 8.27257 5.34129 8.7037 5.86956 8.7037H22.1304Z">
+                                    <Path.RenderTransform>
+                                        <ScaleTransform ScaleX="1.6" ScaleY="1.5"/>
+                                    </Path.RenderTransform>
+                                </Path>
+                                <Path Fill="#007ACC" Margin="-32,25,0,0"
+                                  Data="M12,12.5857864 L14.2928932,10.2928932 L15.7071068,11.7071068 L13.4142136,14 L15.7071068,16.2928932 L14.2928932,17.7071068 L12,15.4142136 L9.70710678,17.7071068 L8.29289322,16.2928932 L10.5857864,14 L8.29289322,11.7071068 L9.70710678,10.2928932 L12,12.5857864 Z M15,3.41421356 L15,7 L18.5857864,7 L15,3.41421356 Z M19,9 L15,9 C13.8954305,9 13,8.1045695 13,7 L13,3 L5,3 L5,21 L19,21 L19,9 Z M5,1 L15.4142136,1 L21,6.58578644 L21,21 C21,22.1045695 20.1045695,23 19,23 L5,23 C3.8954305,23 3,22.1045695 3,21 L3,3 C3,1.8954305 3.8954305,1 5,1 Z">
+                                    <Path.RenderTransform>
+                                        <ScaleTransform ScaleX="0.9" ScaleY="0.9"/>
+                                    </Path.RenderTransform>
+                                </Path>
+                                <Path Fill="#007ACC" Margin="-14,20,0,0"
+                                  Data="M12,12.5857864 L14.2928932,10.2928932 L15.7071068,11.7071068 L13.4142136,14 L15.7071068,16.2928932 L14.2928932,17.7071068 L12,15.4142136 L9.70710678,17.7071068 L8.29289322,16.2928932 L10.5857864,14 L8.29289322,11.7071068 L9.70710678,10.2928932 L12,12.5857864 Z M15,3.41421356 L15,7 L18.5857864,7 L15,3.41421356 Z M19,9 L15,9 C13.8954305,9 13,8.1045695 13,7 L13,3 L5,3 L5,21 L19,21 L19,9 Z M5,1 L15.4142136,1 L21,6.58578644 L21,21 C21,22.1045695 20.1045695,23 19,23 L5,23 C3.8954305,23 3,22.1045695 3,21 L3,3 C3,1.8954305 3.8954305,1 5,1 Z">
+                                    <Path.RenderTransform>
+                                        <ScaleTransform ScaleX="0.9" ScaleY="0.9"/>
+                                    </Path.RenderTransform>
+                                </Path>
+                                <Path Fill="#007ACC" Margin="-3,25,0,0"
+                                  Data="M12,12.5857864 L14.2928932,10.2928932 L15.7071068,11.7071068 L13.4142136,14 L15.7071068,16.2928932 L14.2928932,17.7071068 L12,15.4142136 L9.70710678,17.7071068 L8.29289322,16.2928932 L10.5857864,14 L8.29289322,11.7071068 L9.70710678,10.2928932 L12,12.5857864 Z M15,3.41421356 L15,7 L18.5857864,7 L15,3.41421356 Z M19,9 L15,9 C13.8954305,9 13,8.1045695 13,7 L13,3 L5,3 L5,21 L19,21 L19,9 Z M5,1 L15.4142136,1 L21,6.58578644 L21,21 C21,22.1045695 20.1045695,23 19,23 L5,23 C3.8954305,23 3,22.1045695 3,21 L3,3 C3,1.8954305 3.8954305,1 5,1 Z">
+                                    <Path.RenderTransform>
+                                        <ScaleTransform ScaleX="0.9" ScaleY="0.9"/>
+                                    </Path.RenderTransform>
+                                </Path>
+                            </StackPanel>
+                        </Border>
+
+                        <StackPanel Grid.Column="1" Width="360" Margin="10,5,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                            <StackPanel>
+                                <TextBlock Text="Daten löschen" FontWeight="Bold" FontSize="14"/>
+                                <TextBlock Text="Mit dieser Aktion werden sämtliche Kundendaten in der Datenbank gelöscht." Margin="0,10,0,0" FontWeight="Bold" TextWrapping="Wrap" Foreground="#808080"/>
+                            </StackPanel>
+
+                            <DockPanel Margin="0,15,0,0" HorizontalAlignment="Right">
+                                <Button Margin="5" 
+                                    Command="{Binding DeleteDataCommand}"
+                                    Style="{StaticResource DatabaseSetupButtonsStyle}">
+                                    <StackPanel Height="40" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock Margin="10,0,0,0" Text="Löschen" VerticalAlignment="Center"/>
+                                        <Path Margin="10,10,0,0"
+                                          Data="M11.8489 22.6922C11.5862 22.7201 11.3509 22.5283 11.3232 22.2638L10.4668 14.0733C10.4392 13.8089 10.6297 13.5719 10.8924 13.5441L11.368 13.4937C11.6307 13.4659 11.8661 13.6577 11.8937 13.9221L12.7501 22.1126C12.7778 22.3771 12.5873 22.614 12.3246 22.6418L11.8489 22.6922Z M16.1533 22.6418C15.8906 22.614 15.7001 22.3771 15.7277 22.1126L16.5841 13.9221C16.6118 13.6577 16.8471 13.4659 17.1098 13.4937L17.5854 13.5441C17.8481 13.5719 18.0387 13.8089 18.011 14.0733L17.1546 22.2638C17.127 22.5283 16.8916 22.7201 16.6289 22.6922L16.1533 22.6418Z M11.9233 1C11.3494 1 10.8306 1.34435 10.6045 1.87545L9.54244 4.37037H4.91304C3.8565 4.37037 3 5.23264 3 6.2963V8.7037C3 9.68523 3.72934 10.4953 4.67218 10.6145L7.62934 26.2259C7.71876 26.676 8.11133 27 8.56729 27H20.3507C20.8242 27 21.2264 26.6513 21.2966 26.1799L23.4467 10.5956C24.3313 10.4262 25 9.64356 25 8.7037V6.2963C25 5.23264 24.1435 4.37037 23.087 4.37037H18.4561L17.394 1.87545C17.1679 1.34435 16.6492 1 16.0752 1H11.9233ZM16.3747 4.37037L16.0083 3.50956C15.8576 3.15549 15.5117 2.92593 15.1291 2.92593H12.8694C12.4868 2.92593 12.141 3.15549 11.9902 3.50956L11.6238 4.37037H16.3747ZM21.4694 11.0516C21.5028 10.8108 21.3154 10.5961 21.0723 10.5967L7.1143 10.6285C6.86411 10.6291 6.67585 10.8566 6.72212 11.1025L9.19806 24.259C9.28701 24.7317 9.69985 25.0741 10.1808 25.0741H18.6559C19.1552 25.0741 19.578 24.7058 19.6465 24.2113L21.4694 11.0516ZM22.1304 8.7037C22.6587 8.7037 23.087 8.27257 23.087 7.74074V7.25926C23.087 6.72743 22.6587 6.2963 22.1304 6.2963H5.86957C5.34129 6.2963 4.91304 6.72743 4.91304 7.25926V7.74074C4.91304 8.27257 5.34129 8.7037 5.86956 8.7037H22.1304Z" 
+                                          Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                                          Height="30" Width="30">
+                                            <Path.RenderTransform>
+                                                <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
+                                            </Path.RenderTransform>
+                                        </Path>
+                                    </StackPanel>
+                                </Button>
+                            </DockPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="2" Height="130" Width="600" Background="White" CornerRadius="14" BorderBrush="LightGray" BorderThickness="0.5">
+                    <!--<Border.Effect>
+                        <DropShadowEffect Color="LightGray" Direction="320" ShadowDepth="1" BlurRadius="1"/>
+                    </Border.Effect>-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="180"/>
+                            <ColumnDefinition Width="400"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0" Margin="10" Background="#FFF3F3F3" CornerRadius="14" BorderBrush="LightGray" BorderThickness="0.5">
+                            <!--<Border.Effect>
+                                <DropShadowEffect Color="LightGray" Direction="320" ShadowDepth="1" BlurRadius="1"/>
+                            </Border.Effect>-->
+                            <StackPanel Margin="23,20,0,0" HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Path Fill="#007ACC" 
+                                  Data="">
+                                    <Path.RenderTransform>
+                                        <ScaleTransform ScaleX="3" ScaleY="3.2"/>
+                                    </Path.RenderTransform>
+                                </Path>
+                                <Path Fill="#007ACC" Margin="50,30,0,0"
+                                  Data="">
+                                    <Path.RenderTransform>
+                                        <ScaleTransform ScaleX="0.6" ScaleY="0.6"/>
+                                    </Path.RenderTransform>
+                                </Path>
+                                <Path Fill="#007ACC" Margin="-77,-10,0,0"
+                                  Data="">
+                                    <Path.RenderTransform>
+                                        <ScaleTransform ScaleX="1.8" ScaleY="1.8"/>
+                                    </Path.RenderTransform>
+                                </Path>
+                            </StackPanel>
+                        </Border>
+
+                        <StackPanel Grid.Column="1" Width="360" Margin="10,5,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                            <StackPanel>
+                                <TextBlock Text="" FontWeight="Bold" FontSize="14"/>
+                                <TextBlock Text="" Margin="0,10,0,0" FontWeight="Bold" TextWrapping="Wrap" Foreground="#808080"/>
+                            </StackPanel>
+
+                            <DockPanel Margin="0,15,0,0" >
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Label Content=""/>
+                                    <ToolBarPanel />
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Margin="5" 
+                                        Content=""
+                                        Tag=""
+                                        Style="{StaticResource DatabaseSetupButtonsStyle}" Cursor="Hand"/>
+                                </StackPanel>
+                            </DockPanel>
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Border Margin="-25,-12,0,0" Height="410" Width="300" Background="White" BorderBrush="LightGray" BorderThickness="0.5" CornerRadius="14" VerticalAlignment="Center">
+                    <!--<Border.Effect>
+                        <DropShadowEffect Color="LightGray" Direction="320" ShadowDepth="1" BlurRadius="1"/>
+                    </Border.Effect>-->
+                    <StackPanel>
+                        <DockPanel Margin="10,15">
+                            <TextBlock Text="History" FontWeight="Bold" Foreground="#808080"/>
+                            <Button Width="95" HorizontalAlignment="Right" Content="Alles löschen" Style="{StaticResource DeleteButtonStyle}" Cursor="Hand"/>
+                        </DockPanel>
+                        <Border Margin="5,-5,5,0" Height="350" Background="#FFF3F3F3" CornerRadius="5">
+                            <StackPanel>
+                                <ListView Height="350"
+                                          ItemsSource="{Binding DatabaseHistory}"
+                                          Style="{StaticResource DbHistoryListStyle}">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridView.ColumnHeaderContainerStyle>
+                                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                                    <Setter Property="FontWeight" Value="Bold"/>
+                                                    <Setter Property="Foreground" Value="#808080"/>
+                                                </Style>
+                                            </GridView.ColumnHeaderContainerStyle>
+                                            <GridViewColumn Header="User" DisplayMemberBinding="{Binding User}" />
+                                            <GridViewColumn Header="Aktion" DisplayMemberBinding="{Binding Action}" />
+                                            <GridViewColumn Header="Datum" DisplayMemberBinding="{Binding Date}" />
+                                            <GridViewColumn Header="Uhrzeit" DisplayMemberBinding="{Binding Time}" />
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</UserControl>
